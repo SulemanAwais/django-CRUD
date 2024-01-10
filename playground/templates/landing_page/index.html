@@ -108,20 +108,21 @@
         <nav>
             <ul>
                 <li><a href="/create-task/">Create</a></li>
-                <li><a href="#">Read</a></li>
-                <li><a href="#">Update</a></li>
+                <li><a href="/update-task/">Update</a></li>
                 <li><a href="#">Delete</a></li>
             </ul>
         </nav>
         <section class="content">
-            {{tasks}}
+            <div style="display:none">
+                {{tasks}}
+            </div>
             <table>
                 <thead>
                     <tr>
                         <th>Sr.No</th>
                         <th>Title</th>
                         <th>Content</th>
-                        <th>Date</th>
+<!--                        <th>Date</th>-->
                     </tr>
                 </thead>
                 {% for task in tasks %}
@@ -135,10 +136,6 @@
                 {%endfor%}
             </table>
         </section>
-        <form>
-            <!-- Your form goes here -->
-            <button type="submit" class="submit-button">Submit</button>
-        </form>
     </div>
 </body>
 

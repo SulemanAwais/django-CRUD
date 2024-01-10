@@ -42,3 +42,22 @@ def create_task(request):
     return render(request=request, template_name='landing_page/create_task.html')
 
 
+def update_task(request):
+    if request.method == 'POST':
+        data = request.POST
+        task_id = int(data.get('id')) - 1
+        title = data.get('title')
+        content = data.get('content')
+        print(title)
+        print(task_id)
+        print(type(task_id))
+        print(content)
+        task = Task.objects.all()[task_id]
+        task.title = title
+        task.content = content
+        task.save()
+        return redirect(to='/')
+    return render(request=request, template_name='landing_page/update_task.html')
+
+
+
