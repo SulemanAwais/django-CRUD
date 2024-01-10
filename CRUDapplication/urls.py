@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from playground.views import list_dummy_users, landing_page, create_task, update_task
+from playground.views import list_dummy_users, landing_page, create_task, update_task, delete_task
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('', landing_page),
     path('create-task/', create_task),
     path('update-task/', update_task),
+    path('delete-task/', delete_task),
 ]

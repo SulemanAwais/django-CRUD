@@ -27,37 +27,63 @@ def landing_page(request):
 
 
 def create_task(request):
-    if request.method == 'POST':
-        data = request.POST
-        title = data.get('title')
-        content = data.get('content')
-        print(title)
-        print(content)
-        # date = data.get('title')
-        Task.objects.create(
-            title=title,
-            content=content
-        )
-        return redirect(to='/')
+    try:
+        if request.method == 'POST':
+            data = request.POST
+            title = data.get('title')
+            content = data.get('content')
+            print(title)
+            print(content)
+            # date = data.get('title')
+            Task.objects.create(
+                title=title,
+                content=content
+            )
+            return redirect(to='/')
+    except Exception as error:
+        return HttpResponse(error)
     return render(request=request, template_name='landing_page/create_task.html')
 
 
 def update_task(request):
-    if request.method == 'POST':
-        data = request.POST
-        task_id = int(data.get('id')) - 1
-        title = data.get('title')
-        content = data.get('content')
-        print(title)
-        print(task_id)
-        print(type(task_id))
-        print(content)
-        task = Task.objects.all()[task_id]
-        task.title = title
-        task.content = content
-        task.save()
-        return redirect(to='/')
+    try:
+        if request.method == 'POST':
+            data = request.POST
+            task_id = int(data.get('id')) - 1
+            title = data.get('title')
+            content = data.get('content')
+            print(title)
+            print(task_id)
+            print(type(task_id))
+            print(content)
+            task = Task.objects.all()[task_id]
+            if task:
+                task.title = title
+                task.content = content
+                task.save()
+                return redirect(to='/')
+            else:
+                return HttpResponse('id does not exist')
+    except Exception as error:
+        return HttpResponse(error)
     return render(request=request, template_name='landing_page/update_task.html')
+
+
+def delete_task(request):
+    try:
+        if request.method == 'POST':
+            data = request.POST
+            task_id = int(data.get('id')) - 1
+            print(task_id)
+            task = Task.objects.all()[task_id]
+            if task:
+                task.delete()
+                return redirect(to='/')
+            else:
+                return HttpResponse('id does not exist')
+    except Exception as error:
+        return HttpResponse(error)
+    return render(request=request, template_name='landing_page/delete_task.html')
 
 
 
