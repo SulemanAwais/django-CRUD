@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App with Django</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center; /* Center text */
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        .my-logo {
+            width: 100px;
+            vertical-align: middle;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            padding: 8px 15px;
+            color: black;
+            background-color: #ff5349;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .content {
+            /* Add your styles for the main content section */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Todo App with <span style="float: right"><h1 style="color:#ff5349 ">Django</h1></span></h1>
+            </div>
+                <br>
+
+<!--            <img src="my-logo.png" alt="My Logo" class="my-logo">-->
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#">Create</a></li>
+                <li><a href="#">Read</a></li>
+                <li><a href="#">Update</a></li>
+                <li><a href="#">Delete</a></li>
+            </ul>
+        </nav>
+        <section class="content">
+            <!-- Your main content goes here -->
+        </section>
+    </div>
+</body>
+
+</html>

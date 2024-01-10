@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from playground.views import say_hello
+from playground.views import list_dummy_users, landing_page
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', say_hello)
+    path('/dummy-users', list_dummy_users),
+    path('', landing_page)
 ]
