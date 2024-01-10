@@ -16,4 +16,4 @@ class User(Model):
 class Task(Model):
     title: str = CharField(max_length=200, null=False, blank=False)
     content: str = TextField()
-    day: date = DateField(default=date.today())
+    # day: date = DateField(default=date.today())
