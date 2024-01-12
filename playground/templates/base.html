@@ -111,16 +111,28 @@
             background-color: white;
             color: black;
         }
+        span{
+        font-size:30px;
+
     </style>
 </head>
 
 <body>
+{% load static %}
+
     <div class="container">
         <header>
             <div>
-                <h1>Todo App with <span><h1 style="color:#ff5349 ">Django</h1></span></h1>
+               <span style="color:white"><b>Hello</b> </span>
+               <span style="color:#ff5349"><b>{{username}}, </b></span>
+                <br>
+                <br>
+               <span style="color:White"><b>Welcome to the</b></span>
+               <span style="color:#ff5349"><b>Django</b></span>
+               <span style="color:White"><b> Todo App</b></span>
+
             </div>
-<!--            <img src="django-logo.png" alt="My Logo" class="my-logo">-->
+<!--            <img src="{% static 'django-logo.png' %}" alt="My Logo" class="my-logo">-->
 
         </header>
         {% block start %}

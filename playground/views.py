@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 
@@ -16,14 +17,15 @@ def list_dummy_users(request):
     return render(request=request, template_name='hello.html', context={'users': users})
 
 
-def landing_page(request):
+def landing_page(request, username):
     tasks_queryset = Task.objects.all()
     print(tasks_queryset)
     if tasks_queryset is not None:
-        tasks = {'tasks': tasks_queryset}
+        tasks = {'tasks': tasks_queryset,
+                 'username': username}
         return render(request=request, template_name='landing_page/index.html', context=tasks)
     else:
-        return render(request=request, template_name='landing_page/index.html')
+        return render(request=request, template_name='landing_page/index.html', context={'username': username})
 
 
 def create_task(request):
@@ -88,3 +90,27 @@ def delete_task(request, id):
             return HttpResponse('id does not exist')
     except Exception as error:
         return HttpResponse(error)
+
+
+def register(request):
+    try:
+        if request.method == 'POST':
+            data = request.POST
+            email = data.get('email')
+            password = data.get('password')
+            username = data.get('username')
+            user = User.objects.create(
+                username=username,
+                email=email,
+            )
+            user.set_password(password)
+            user.save()
+            landing_page_rul = reverse(viewname=landing_page, kwargs={'username': username})
+            return redirect(to=landing_page_rul)
+    except Exception as error:
+        return HttpResponse(error)
+    return render(request=request, template_name='register/index.html')
+
+
+def login_page(request):
+    return render(request=request, template_name='login/index.html')
