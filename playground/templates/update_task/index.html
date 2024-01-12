@@ -119,23 +119,11 @@
             <div>
                 <h1> Todo App with <span><h1 style="color:#ff5349 ">Django</h1></span></h1>
             </div>
-<!--            <img src="my-logo.png" alt="My Logo" class="my-logo">-->
-<!--        </header>-->
-<!--        <nav>-->
-<!--            <ul>-->
-<!--                <li><a href="/">Home</a></li>-->
-<!--            </ul>-->
-<!--        </nav>-->
         <section class="content">
-<!--            {{id}}-->
             <form method="post" action="/update-task/{{id}}/">
-<!--                <div class="form-group">-->
-<!--                    <label for="exampleFormControlInput">Id</label>-->
-<!--                    <input type="text" name="id" class="form-control" id="exampleFormControlInput" placeholder="Enter task id">-->
-<!--                </div>-->
+
                 <div class="form-group">
                     {% csrf_token %}
-
                     <label for="exampleFormControlInput1">Title</label>
                     <input type="text" name= 'title' value="{{task.title}}" class="form-control" id="exampleFormControlInput1" placeholder="Enter updated title">
                 </div>
