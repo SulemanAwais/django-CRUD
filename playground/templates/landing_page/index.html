@@ -3,8 +3,8 @@
 <nav>
             <ul>
                 <li><a href="/create-task/">Create</a></li>
-                <li><a href="/update-task/">Update</a></li>
-                <li><a href="/delete-task/">Delete</a></li>
+<!--                <li><a href="/update-task/">Update</a></li>-->
+<!--                <li><a href="/delete-task/">Delete</a></li>-->
             </ul>
         </nav>
         <section class="content">
@@ -17,14 +17,19 @@
                         <th>Sr.No</th>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 {% for task in tasks %}
-                <tbody style="overflow-x: hidden">
+                <tbody>
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td>{{task.title}}</td>
-                        <td>{{task.content}}</td>
+                        <td style="min-width: 350px;max-width:600px;overflow-x:auto">{{task.content}}</td>
+                        <td>
+                            <a type="button" href="/update-task/{{task.id}}/" style="background:green;color:white" >Update</a>
+                            <a type="button" href="/delete-task/{{task.id}}/" style="background:red;color:white" >Delete</a>
+                        </td>
                     </tr>
                 </tbody>
                 {%endfor%}

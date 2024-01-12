@@ -23,6 +23,7 @@ urlpatterns = [
     path('dummy-users/', list_dummy_users),
     path('', landing_page),
     path('create-task/', create_task),
+    path('update-task/<id>/', update_task),
     path('update-task/', update_task),
-    path('delete-task/', delete_task),
+    path('delete-task/<id>/', delete_task),
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 
 from playground.models import Task
@@ -45,45 +45,46 @@ def create_task(request):
     return render(request=request, template_name='create_task/index.html')
 
 
-def update_task(request):
+def update_task(request, id):
     try:
+        task_id = int(id)
         if request.method == 'POST':
             data = request.POST
-            task_id = int(data.get('id')) - 1
             title = data.get('title')
             content = data.get('content')
             print(title)
             print(task_id)
-            print(type(task_id))
-            print(content)
-            task = Task.objects.all()[task_id]
+            #     print(type(task_id))
+            #     print(content)
+            task = Task.objects.get(id=id)
             if task:
-                task.title = title
-                task.content = content
-                task.save()
-                return redirect(to='/')
-            else:
-                return HttpResponse('id does not exist')
+                if title:
+                    task.title = title
+                if content:
+                    task.content = content
+            task.save()
+            # return redirect(to='/')
+            # return render(request=request, template_name='update_task/index.html', context={'id': id})
+            landing_page_url = reverse(landing_page)
+            return redirect(to=landing_page_url)
+
+        else:
+            return render(request=request, template_name='update_task/index.html', context={'id': id})
     except Exception as error:
         return HttpResponse(error)
-    return render(request=request, template_name='update_task/index.html')
+
+    # return render(request=request, template_name='update_task/index.html')
 
 
-def delete_task(request):
+def delete_task(request, id):
     try:
-        if request.method == 'POST':
-            data = request.POST
-            task_id = int(data.get('id')) - 1
-            print(task_id)
-            task = Task.objects.all()[task_id]
-            if task:
-                task.delete()
-                return redirect(to='/')
-            else:
-                return HttpResponse('id does not exist')
+        task_id = int(id)
+        print(task_id)
+        task = Task.objects.get(id=id)
+        if task:
+            task.delete()
+            return redirect(to='/')
+        else:
+            return HttpResponse('id does not exist')
     except Exception as error:
         return HttpResponse(error)
-    return render(request=request, template_name='delete_task/index.html')
-
-
-

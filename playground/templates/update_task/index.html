@@ -53,6 +53,15 @@
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
+        a {
+            text-decoration: none;
+            padding: 8px 15px;
+            color: black;
+            background-color: #ff5349;
+            border-radius: 5px;
+            font-size: 20px
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
         nav a:hover {
             background-color: white;
@@ -111,28 +120,31 @@
                 <h1> Todo App with <span><h1 style="color:#ff5349 ">Django</h1></span></h1>
             </div>
 <!--            <img src="my-logo.png" alt="My Logo" class="my-logo">-->
-        </header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-            </ul>
-        </nav>
+<!--        </header>-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li><a href="/">Home</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
         <section class="content">
-            <form method="post" action="/update-task/">
+<!--            {{id}}-->
+            <form method="post" action="/update-task/{{id}}/">
+<!--                <div class="form-group">-->
+<!--                    <label for="exampleFormControlInput">Id</label>-->
+<!--                    <input type="text" name="id" class="form-control" id="exampleFormControlInput" placeholder="Enter task id">-->
+<!--                </div>-->
                 <div class="form-group">
                     {% csrf_token %}
-                    <label for="exampleFormControlInput">Id</label>
-                    <input type="text" name="id" class="form-control" id="exampleFormControlInput" placeholder="Enter task id">
-                </div>
-                <div class="form-group">
+
                     <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" name= 'title' class="form-control" id="exampleFormControlInput1" placeholder="Enter updated title">
+                    <input type="text" name= 'title' value="{{task.title}}" class="form-control" id="exampleFormControlInput1" placeholder="Enter updated title">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea2">Content</label>
-                    <textarea class="form-control" name="content" id="exampleFormControlTextarea2" rows="3" placeholder="Enter updated content"></textarea>
+                    <textarea class="form-control"  name="content" id="exampleFormControlTextarea2" rows="3" placeholder="Enter updated content">{{task.content}}</textarea>
                 </div>
-                <button type="submit" class="submit-button">Update</button>
+                <button type="submit" class="submit-button" style="font-size: 15px">Update</button>
+                <a type="button" style="" class="submit-button" href="/">Home</a>
             </form>
         </section>
     </div>

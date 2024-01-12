@@ -124,17 +124,17 @@
         <form method="post" action="/create-task/">
             {% csrf_token %}
             <div class="form-group">
-                <label  for="exampleFormControlInput1">Title</label>
+                <label  for="exampleFormControlInput">Title</label>
                 <input name="title"type="text" class="form-control" id="exampleFormControlInput" placeholder="Enter title">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Content</label>
                 <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter content"></textarea>
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Date</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter date">
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label for="exampleFormControlInput1">Date</label>-->
+<!--                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter date">-->
+<!--            </div>-->
             <button type="submit" class="submit-button">Create</button>
         </form>
     </div>
