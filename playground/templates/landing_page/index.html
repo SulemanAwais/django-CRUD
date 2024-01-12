@@ -11,7 +11,7 @@
             <div style="display:none">
                 {{tasks}}
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered" >
                 <thead>
                     <tr>
                         <th>Sr.No</th>
@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 {% for task in tasks %}
-                <tbody>
+                <tbody style="overflow-x: hidden">
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td>{{task.title}}</td>
