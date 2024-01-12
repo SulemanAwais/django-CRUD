@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App with Django</title>
+    <title>Delete Todo</title>
     <style>
         body {
             margin: 0;
@@ -60,7 +60,7 @@
         }
 
         .content {
-            /* Add your styles for the main content section */
+            margin-top: 20px;
         }
 
         form {
@@ -110,7 +110,6 @@
             <div>
                 <h1>Todo App with <span><h1 style="color:#ff5349 ">Django</h1></span></h1>
             </div>
-            <br>
 <!--            <img src="my-logo.png" alt="My Logo" class="my-logo">-->
         </header>
         <nav>
@@ -119,24 +118,15 @@
             </ul>
         </nav>
         <section class="content">
+            <form method="post" action="/delete-task/">
+                {% csrf_token%}
+                <div class="form-group">
+                    <label for="exampleFormControlInput">Task ID</label>
+                    <input name="id" type="text" class="form-control" id="exampleFormControlInput" placeholder="Enter task ID to delete">
+                </div>
+                <button type="submit" class="submit-button">Delete</button>
+            </form>
         </section>
-        <br>
-        <form method="post" action="/create-task/">
-            {% csrf_token %}
-            <div class="form-group">
-                <label  for="exampleFormControlInput1">Title</label>
-                <input name="title"type="text" class="form-control" id="exampleFormControlInput" placeholder="Enter title">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Content</label>
-                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter content"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Date</label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter date">
-            </div>
-            <button type="submit" class="submit-button">Submit</button>
-        </form>
     </div>
 </body>
 

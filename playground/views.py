@@ -42,7 +42,7 @@ def create_task(request):
             return redirect(to='/')
     except Exception as error:
         return HttpResponse(error)
-    return render(request=request, template_name='landing_page/create_task.html')
+    return render(request=request, template_name='create_task/index.html')
 
 
 def update_task(request):
@@ -66,7 +66,7 @@ def update_task(request):
                 return HttpResponse('id does not exist')
     except Exception as error:
         return HttpResponse(error)
-    return render(request=request, template_name='landing_page/update_task.html')
+    return render(request=request, template_name='update_task/index.html')
 
 
 def delete_task(request):
@@ -83,7 +83,7 @@ def delete_task(request):
                 return HttpResponse('id does not exist')
     except Exception as error:
         return HttpResponse(error)
-    return render(request=request, template_name='landing_page/delete_task.html')
+    return render(request=request, template_name='delete_task/index.html')
 
 
 

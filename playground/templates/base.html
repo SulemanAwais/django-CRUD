@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Todo</title>
+    <title>Todo App with Django</title>
     <style>
         body {
             margin: 0;
@@ -18,7 +18,7 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            text-align: center;
+            text-align: center; /* Center text */
         }
 
         header {
@@ -60,31 +60,33 @@
         }
 
         .content {
-            margin-top: 20px;
+            margin-top: 20px; /* Add space between the header and the content */
         }
 
-        form {
-            text-align: left;
-            margin-top: 20px;
+        .table-container {
+            overflow-x: auto;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-control {
+        table {
             width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
+<!--            border-collapse: collapse;-->
+            margin-top: 20px;
             border: 1px solid #ff5349;
-            border-radius: 5px;
-            background-color: black;
-            color: white;
+            text-align: center;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: white;
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ff5349;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        th {
+            background-color: #ff5349;
+            color: black;
         }
 
         .submit-button {
@@ -110,23 +112,12 @@
             <div>
                 <h1>Todo App with <span><h1 style="color:#ff5349 ">Django</h1></span></h1>
             </div>
-<!--            <img src="my-logo.png" alt="My Logo" class="my-logo">-->
+<!--            <img src="django-logo.png" alt="My Logo" class="my-logo">-->
+
         </header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-            </ul>
-        </nav>
-        <section class="content">
-            <form method="post" action="/delete-task/">
-                {% csrf_token%}
-                <div class="form-group">
-                    <label for="exampleFormControlInput">Task ID</label>
-                    <input name="id" type="text" class="form-control" id="exampleFormControlInput" placeholder="Enter task ID to delete">
-                </div>
-                <button type="submit" class="submit-button">Delete Todo</button>
-            </form>
-        </section>
+        {% block start %}
+
+        {% endblock %}
     </div>
 </body>
 
