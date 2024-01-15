@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,28 +7,10 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "styles.css" %}">
 </head>
-
 <body>
-{% load static %}
+    {% block start %}
 
-    <div class="container">
-        <header>
-            <div>
-               <span style="color:white"><b>Hello</b> </span>
-               <span style="color:#ff5349"><b>{{username}}, </b></span>
-                <br>
-                <br>
-               <span style="color:White"><b>Welcome to the</b></span>
-               <span style="color:#ff5349"><b>Django</b></span>
-               <span style="color:White"><b> Todo App</b></span>
-
-            </div>
-
-        </header>
-        {% block start %}
-
-        {% endblock %}
-    </div>
+    {% endblock %}
 </body>
 
 </html>

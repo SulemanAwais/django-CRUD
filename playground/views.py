@@ -103,18 +103,24 @@ def register(request):
             email = data.get('email')
             password = data.get('password')
             username = data.get('username')
-            user = User.objects.filter(username=username)
-            if user.exists():
-                messages.warning(request=request, message='username should be unique')
+            user_from_username = User.objects.filter(username=username)
+            if user_from_username.exists():
+                messages.add_message(request=request, level=messages.WARNING, message='Username should be unique')
                 return redirect(to='/register/')
-            user = User.objects.create(
-                username=username,
-                email=email,
-            )
-            user.set_password(password)
-            user.save()
-            landing_page_rul = reverse(viewname=landing_page, kwargs={'username': username})
-            return redirect(to=landing_page_rul)
+            user_from_email = User.objects.filter(email=email)
+            if user_from_email.exists():
+                messages.add_message(request=request, level=messages.WARNING, message='Email already exists')
+                return redirect(to='/register/')
+            else:
+
+                user = User.objects.create(
+                    username=username,
+                    email=email,
+                )
+                user.set_password(password)
+                user.save()
+                landing_page_rul = reverse(viewname=landing_page, kwargs={'username': username})
+                return redirect(to=landing_page_rul)
     except Exception as error:
         return HttpResponse(error)
     return render(request=request, template_name='register/index.html')

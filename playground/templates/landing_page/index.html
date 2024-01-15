@@ -1,41 +1,54 @@
 {% extends "base.html" %}
 {% block start %}
-<nav>
-            <ul>
-                <li><a href="/create-task/">Create Task</a></li>
-<!--                <li><a href="/update-task/">Update</a></li>-->
-<!--                <li><a href="/delete-task/">Delete</a></li>-->
-            </ul>
-        </nav>
-        <section class="content">
-            <div style="display:none">
-                {{tasks}}
+<div class="container">
+    <div>
+    <header>
+            <div>
+               <span style="color:white"><b>Hello</b> </span>
+               <span style="color:#ff5349"><b>{{username}} </b></span>
+                <br>
+                <br>
+               <span style="color:White"><b>Welcome to the</b></span>
+                <br>
+
+               <span style="color:#ff5349"><b>Django</b></span>
+               <span style="color:White"><b> Todo App</b></span>
+                <br>
+                <br>
             </div>
-
-
-            <table class="table table-bordered" >
-                <thead>
-                    <tr>
-                        <th>Sr.No</th>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                {% for task in tasks %}
-                <tbody>
-                    <tr>
-                        <td>{{forloop.counter}}</td>
-                        <td>{{task.title}}</td>
-                        <td style="min-width: 350px;max-width:600px;overflow-x:auto">{{task.content}}</td>
-                        <td>
-                            <a type="button" href="/update-task/{{task.id}}/" style="background:green;color:white" >Update</a>
-                            <a type="button" href="/delete-task/{{task.id}}/" style="background:red;color:white" >Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-                {%endfor%}
-            </table>
-        </section>
-
+    </header>
+</div>
+    <nav>
+    <ul>
+        <li><a href="/create-task/">Create Task</a></li>
+        <li><a href="/">Sign out</a></li>
+    </ul>
+</nav>
+</div>
+<section class="content">
+    <div style="display:none">{{tasks}}</div>
+    <table class="table table-bordered" id="table_container">
+        <thead>
+            <tr>
+                <th>Sr.No</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% for task in tasks %}
+        <tbody>
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{task.title}}</td>
+                <td style="min-width: 350px;max-width:600px;overflow-x:auto">{{task.content}}</td>
+                <td style="width: 40px">
+                    <a type="button" href="/update-task/{{task.id}}/" style="background:green;color:white" >Update</a>
+                    <a type="button" href="/delete-task/{{task.id}}/" style="background:red;color:white" >Delete</a>
+                </td>
+            </tr>
+        </tbody>
+        {%endfor%}
+    </table>
+</section>
 {% endblock %}

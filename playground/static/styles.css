@@ -108,10 +108,15 @@ nav a:hover {
 
 .table-container {
     overflow-x: auto;
+    margin: 0px, auto
+}
+#table_container {
+    overflow-x: auto;
+    margin: 0 auto
 }
 
 table {
-    width: 100%;
+    width: 80%;
     margin-top: 20px;
     border: 1px solid #ff5349;
     text-align: center;
@@ -168,11 +173,11 @@ form {
     background-color: white;
     color: black;
 }
-/*
 #login_register_link{
     color:#ff5349;
-    border-radius: 0px
+    background: none;
+    border-radius: 0px;
+    padding: 0px;
 
 }
-*/
 
