@@ -129,8 +129,8 @@ def register(request):
                 )
                 user.set_password(password)
                 user.save()
-                landing_page_rul = reverse(viewname=landing_page, kwargs={'username': username})
-                return redirect(to=landing_page_rul)
+                login(request=request, user=user)
+                return redirect(to='/landing_page/')
     except Exception as error:
         return HttpResponse(error)
     return render(request=request, template_name='register/index.html')
