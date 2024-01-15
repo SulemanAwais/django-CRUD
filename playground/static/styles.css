@@ -186,6 +186,12 @@ form {
   color: white;
   margin-bottom: 15px;
 }
+.warning-alert {
+  padding: 20px;
+  background-color: #F4BE01; /
+  color: white;
+  margin-bottom: 15px;
+}
 
 .closebtn {
   margin-left: 15px;

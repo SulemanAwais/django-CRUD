@@ -8,9 +8,17 @@
     </header>
     <section class="content">
         <form method="post" action="/update-task/{{id}}/">
-
             <div class="form-group">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="warning-alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
                 {% csrf_token %}
+
                 <label for="exampleFormControlInput1">Title</label>
                 <input type="text" name= 'title' value="{{task.title}}" class="form-control" id="exampleFormControlInput1" placeholder="Enter updated title">
             </div>

@@ -62,15 +62,14 @@ def create_task(request):
 @login_required(login_url='/')
 def update_task(request, id):
     try:
-        task_id = int(id)
         if request.method == 'POST':
             data = request.POST
             title = data.get('title')
             content = data.get('content')
-            print(title)
-            print(task_id)
-            #     print(type(task_id))
-            #     print(content)
+            # print(title,content)
+            if title is '' and content is '':
+                messages.warning(request=request, message="At least one field need to be filled")
+                return redirect(f'/update-task/{id}', context={'id': id})
             task = Task.objects.get(id=id)
             if task:
                 if title:
@@ -78,8 +77,6 @@ def update_task(request, id):
                 if content:
                     task.content = content
             task.save()
-            # return redirect(to='/')
-            # return render(request=request, template_name='update_task/index.html', context={'id': id})
             landing_page_url = reverse(landing_page)
             return redirect(to=landing_page_url)
 
