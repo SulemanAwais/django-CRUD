@@ -20,6 +20,15 @@
         </section>
         <br>
         <form method="post" action="/create-task/">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="warning-alert">
+                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ message }}
+            </div>
+            {% endfor %}
+
+            {% endif %}
             {% csrf_token %}
             <div class="form-group">
                 <label  for="exampleFormControlInput">Title</label>

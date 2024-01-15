@@ -46,9 +46,9 @@ def create_task(request):
             data = request.POST
             title = data.get('title')
             content = data.get('content')
-            print(title)
-            print(content)
-            # date = data.get('title')
+            if title is '' and content is '':
+                messages.warning(request=request, message="At least one field need to be filled")
+                return redirect(f'/create-task/')
             Task.objects.create(
                 title=title,
                 content=content
@@ -66,7 +66,6 @@ def update_task(request, id):
             data = request.POST
             title = data.get('title')
             content = data.get('content')
-            # print(title,content)
             if title is '' and content is '':
                 messages.warning(request=request, message="At least one field need to be filled")
                 return redirect(f'/update-task/{id}', context={'id': id})
