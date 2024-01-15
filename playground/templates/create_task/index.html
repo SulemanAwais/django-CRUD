@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App with Django</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static "styles.css" %}">
-</head>
-
-<body>
+{% extends 'base.html' %}
+{% block start %}
     <div class="container">
         <header>
             <div>
@@ -42,6 +32,4 @@
             <button type="submit" class="submit-button">Create</button>
         </form>
     </div>
-</body>
-
-</html>
+{% endblock %}

@@ -1,39 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block start %}
+<div class="container">
+    <header>
+        <div>
+            <h1> Todo App with <span><h1 style="color:#ff5349 ">Django</h1></span></h1>
+        </div>
+    </header>
+    <section class="content">
+        <form method="post" action="/update-task/{{id}}/">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Todo - Todo App with Django</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static "styles.css" %}">
-</head>
-
-<body>
-    <div class="container">
-        <header>
-            <div>
-                <h1> Todo App with <span><h1 style="color:#ff5349 ">Django</h1></span></h1>
+            <div class="form-group">
+                {% csrf_token %}
+                <label for="exampleFormControlInput1">Title</label>
+                <input type="text" name= 'title' value="{{task.title}}" class="form-control" id="exampleFormControlInput1" placeholder="Enter updated title">
             </div>
-        <section class="content">
-            <form method="post" action="/update-task/{{id}}/">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea2">Content</label>
+                <textarea class="form-control"  name="content" id="exampleFormControlTextarea2" rows="3" placeholder="Enter updated content">{{task.content}}</textarea>
+            </div>
+            <button type="submit" class="submit-button" style="font-size: 15px">Update</button>
+            <a class="submit-button" href="/">Home</a>
+            <a href="/logout/" class="submit-button">Sign out</a>
 
-                <div class="form-group">
-                    {% csrf_token %}
-                    <label for="exampleFormControlInput1">Title</label>
-                    <input type="text" name= 'title' value="{{task.title}}" class="form-control" id="exampleFormControlInput1" placeholder="Enter updated title">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea2">Content</label>
-                    <textarea class="form-control"  name="content" id="exampleFormControlTextarea2" rows="3" placeholder="Enter updated content">{{task.content}}</textarea>
-                </div>
-                <button type="submit" class="submit-button" style="font-size: 15px">Update</button>
-                <a class="submit-button" href="/">Home</a>
-                <a href="/logout/" class="submit-button">Sign out</a>
-
-            </form>
-        </section>
-    </div>
-</body>
-
-</html>
+        </form>
+    </section>
+</div>
+{% endblock%}
