@@ -1,11 +1,15 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-
+from django.contrib import messages
 from playground.models import Task
 
 
 # from playground.models import Task
+
+
+def root(request):
+    return render(request=request, template_name='root/index.html')
 
 
 def list_dummy_users(request):
@@ -99,6 +103,10 @@ def register(request):
             email = data.get('email')
             password = data.get('password')
             username = data.get('username')
+            user = User.objects.filter(username=username)
+            if user.exists():
+                messages.warning(request=request, message='username should be unique')
+                return redirect(to='/register/')
             user = User.objects.create(
                 username=username,
                 email=email,
