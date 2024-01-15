@@ -3,13 +3,16 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib import messages
 from playground.models import Task
-from django.contrib.auth import authenticate, login
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # from playground.models import Task
 
 
 def root(request):
-    return render(request=request, template_name='root/index.html')
+    if request.user.is_authenticated:
+        return redirect(to='/landing_page/')
+    else:
+        return render(request=request, template_name='root/index.html')
 
 
 def list_dummy_users(request):
@@ -21,6 +24,7 @@ def list_dummy_users(request):
     return render(request=request, template_name='hello.html', context={'users': users})
 
 
+@login_required(login_url='/login/')
 def landing_page(request):
     tasks_queryset = Task.objects.all()
     print(tasks_queryset)
@@ -35,6 +39,7 @@ def landing_page(request):
                       )
 
 
+@login_required(login_url='/')
 def create_task(request):
     try:
         if request.method == 'POST':
@@ -54,6 +59,7 @@ def create_task(request):
     return render(request=request, template_name='create_task/index.html')
 
 
+@login_required(login_url='/')
 def update_task(request, id):
     try:
         task_id = int(id)
@@ -85,6 +91,7 @@ def update_task(request, id):
     # return render(request=request, template_name='update_task/index.html')
 
 
+@login_required(login_url='/')
 def delete_task(request, id):
     try:
         task_id = int(id)
@@ -147,3 +154,11 @@ def login_page(request):
         print(error)
         return HttpResponse(error)
     return render(request=request, template_name='login/index.html')
+
+
+def logout_page(request):
+    try:
+        logout(request=request)
+        return redirect('/')
+    except Exception as error:
+        return HttpResponse(error)
