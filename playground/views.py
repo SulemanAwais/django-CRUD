@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib import messages
 from playground.models import Task
-
+from django.contrib.auth import authenticate, login
 
 # from playground.models import Task
 
@@ -21,15 +21,18 @@ def list_dummy_users(request):
     return render(request=request, template_name='hello.html', context={'users': users})
 
 
-def landing_page(request, username):
+def landing_page(request):
     tasks_queryset = Task.objects.all()
     print(tasks_queryset)
     if tasks_queryset is not None:
         tasks = {'tasks': tasks_queryset,
-                 'username': username}
+                 # 'username': username
+                 }
         return render(request=request, template_name='landing_page/index.html', context=tasks)
     else:
-        return render(request=request, template_name='landing_page/index.html', context={'username': username})
+        return render(request=request, template_name='landing_page/index.html'
+                      # , context={'username': username}
+                      )
 
 
 def create_task(request):
@@ -105,11 +108,11 @@ def register(request):
             username = data.get('username')
             user_from_username = User.objects.filter(username=username)
             if user_from_username.exists():
-                messages.add_message(request=request, level=messages.WARNING, message='Username should be unique')
+                messages.warning(request=request, message='Username should be unique')
                 return redirect(to='/register/')
             user_from_email = User.objects.filter(email=email)
             if user_from_email.exists():
-                messages.add_message(request=request, level=messages.WARNING, message='Email already exists')
+                messages.warning(request=request, message='Email already exists')
                 return redirect(to='/register/')
             else:
 
@@ -127,4 +130,20 @@ def register(request):
 
 
 def login_page(request):
+    try:
+        if request.method == 'POST':
+            data = request.POST
+            username = data.get("username")
+            password = data.get("password")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request=request, user=user)
+                # landing_page_url = reverse(viewname=landing_page, kwargs={'username': username})
+                return redirect(to='/landing_page/')
+            else:
+                messages.warning(request=request, message='Username or Password didn\'t matched')
+                return redirect(to='/login/')
+    except Exception as error:
+        print(error)
+        return HttpResponse(error)
     return render(request=request, template_name='login/index.html')

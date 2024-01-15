@@ -5,7 +5,9 @@
     <header>
             <div>
                <span style="color:white"><b>Hello</b> </span>
-               <span style="color:#ff5349"><b>{{username}} </b></span>
+                {% if request.user %}
+                    <span style="color:#ff5349"><b>{{request.user}} </b></span>
+                {% endif %}
                 <br>
                 <br>
                <span style="color:White"><b>Welcome to the</b></span>

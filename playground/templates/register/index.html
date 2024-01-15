@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% block start %}
+
 <div class="container">
 
     {% for message in messages %}
         {% if message %}
             {% if message.level == 30 %}
-                <div class="alert alert-danger" role="alert">{{ message }}</div>
+
+                <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ message }}
+                </div>
             {% endif %}
         {% endif %}
     {% endfor %}
-
     <h1>Register</h1>
     <form method="post" action="/register/" style="text-align:left">
                 {% csrf_token %}
-
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" name="username" class="form-control" id="username" placeholder="Choose a username">
@@ -28,6 +31,7 @@
         </div>
          <p style="color:white;font-size:13px">Already have an account? <a  id="login_register_link" href="/login/">Login</a></p>
         <button type="submit" class="submit-button">Register</button>
+        <a class="option-button" href="/">Home</a>
     </form>
 </div>
 {% endblock %}

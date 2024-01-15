@@ -22,7 +22,7 @@ urlpatterns = [
     path('', root),
     path('admin/', admin.site.urls),
     path('dummy-users/', list_dummy_users),
-    path('landing_page/<username>/', landing_page),
+    path('landing_page/', landing_page),
     path('create-task/', create_task),
     path('update-task/<id>/', update_task),
     path('update-task/', update_task),
