@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block start %}
+<div class="container">
+    <span style="color:#ff5349"><b>Django</b></span>
+    <span style="color:White"><b> Employee Login</b></span>
+    <form method="post" action="/ems-login/" style="margin-top: 20px;">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="registration_id" style="color: white;">Registration ID:</label>
+            <input type="text" name="registration_id" id="registration_id" placeholder="Registration ID" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password" style="color: white;">Password:</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+        </div>
+        <button type="submit" class="submit-button" style="background-color: #ff5349; color: black;">Login</button>
+    </form>
+</div>
+{% endblock %}

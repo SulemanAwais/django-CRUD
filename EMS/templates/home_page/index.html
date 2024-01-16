@@ -1,28 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block start %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMS - Employee Management System</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css'%}">
-</head>
-
-<body>
-    <div class="container">
+<div class="container">
         <span style="color:#ff5349"><b>Django</b></span>
         <span style="color:White"><b>EMS</b></span>
         <p>Authenticate as an employee</p>
-        <a href="/login/" class="option-button">Login</a>
-        <a href="/register/" class="option-button">Register</a>
+        <a href="/ems-login/" class="option-button">Login</a>
+        <a href="/ems-register/" class="option-button">Register</a>
     </div>
-    <footer style="position: fixed; bottom: 0; width: 100%; text-align: center; background-color: #222; padding: 20px; color: white;">
+<footer style="position: fixed; bottom: 0; width: 100%; text-align: center; background-color: #222; padding: 20px; color: white;">
         <h2>Back to Django TODO app</h2>
     <!--    <p style="margin-bottom: 20px;">Effortlessly manage tasks and employees with our integrated Employee Management System.</p>-->
         <a href="/" class="option-button" style="background-color: #ff5349; color: black;">TODO</a>
     </footer>
 
-</body>
-
-</html>
+{% endblock %}
