@@ -22,7 +22,7 @@ from playground.views import root, list_dummy_users, landing_page, create_task, 
 
 urlpatterns = [
     path('', root, name='welcome'),
-    path('employee-management-system/', ems_root, name='welcome'),
+    path('ems/', ems_root, name='welcome'),
     path('admin/', admin.site.urls),
     path('dummy-users/', list_dummy_users),
     path('landing_page/', landing_page, name='Home'),

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block start %}
 <div class="container">
     <span style="color:#ff5349"><b>Django</b></span>
@@ -7,4 +8,9 @@
     <a href="/login/" class="option-button">Login</a>
     <a href="/register/" class="option-button">Register</a>
 </div>
+<footer style="position: fixed; bottom: 0; width: 100%; text-align: center; background-color: #222; padding: 20px; color: white;">
+    <h2>Explore Django Employee Management System</h2>
+<!--    <p style="margin-bottom: 20px;">Effortlessly manage tasks and employees with our integrated Employee Management System.</p>-->
+    <a href="/ems/" class="option-button" style="background-color: #ff5349; color: black;">Try Django EMS</a>
+</footer>
 {% endblock %}
