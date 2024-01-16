@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ff5349;
+    border-radius: 5px;
+}
+
+h1 {
+    color: white;
+    white-space: nowrap;
+
+}
+.option-button {
+    padding: 10px 15px;
+    margin: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #ff5349;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.option-button:hover {
+    background-color: white;
+    color: black;
+}

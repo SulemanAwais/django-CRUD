@@ -139,9 +139,8 @@ def login_page(request):
             username = data.get("username")
             password = data.get("password")
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not '' and password is not '':
                 login(request=request, user=user)
-                # landing_page_url = reverse(viewname=landing_page, kwargs={'username': username})
                 return redirect(to='/landing_page/')
             else:
                 messages.warning(request=request, message='Username or Password didn\'t matched')

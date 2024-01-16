@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+from EMS.views import ems_root
 from playground.views import root, list_dummy_users, landing_page, create_task, update_task, delete_task, login_page, register, logout_page
 
 urlpatterns = [
     path('', root, name='welcome'),
+    path('employee-management-system/', ems_root, name='welcome'),
     path('admin/', admin.site.urls),
     path('dummy-users/', list_dummy_users),
     path('landing_page/', landing_page, name='Home'),
