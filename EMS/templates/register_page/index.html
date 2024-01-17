@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block start %}
+<div class="container">
+    <span style="color:#ff5349"><b>Django</b></span>
+    <span style="color:White"><b> Employee Registration</b></span>
+    <form method="post" action="/employee-register/" style="margin-top: 20px;">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="first_name" style="color: white;">First Name:</label>
+            <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First name" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name" style="color: white;">Last Name:</label>
+            <input type="text" name="last_name" id="last_name" class="form-control" required placeholder="Last name">
+        </div>
+        <div class="form-group">
+            <label for="email" style="color: white;">Email:</label>
+            <input type="email" name="email" id="email" class="form-control" required placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="password" style="color: white;">Password:</label>
+            <input type="password" name="password" id="password" class="form-control" required placeholder="Password">
+        </div>
+        <button type="submit" class="submit-button" style="background-color: #ff5349; color: black;">Register</button>
+    </form>
+</div>
+{% endblock %}

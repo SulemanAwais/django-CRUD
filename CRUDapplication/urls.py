@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from EMS.views import ems_root, ems_login_page
+from EMS.views import ems_root, ems_login_page, ems_register_page
 from playground.views import root, list_dummy_users, landing_page, create_task, update_task, delete_task, login_page, register, logout_page
 
 urlpatterns = [
@@ -34,6 +34,7 @@ urlpatterns = [
     path('register/', register, name='Register user'),
 
     path('ems/', ems_root, name='welcome'),
-    path('ems-login/',ems_login_page , name='welcome'),
+    path('ems-login/', ems_login_page, name='welcome'),
+    path('ems-register/', ems_register_page, name='welcome'),
 
 ]
