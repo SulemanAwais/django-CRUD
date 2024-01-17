@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='employee',
             name='domain',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='domain', to='EMS.domain'),
+            field=models.CharField(max_length=30),
         ),
     ]
