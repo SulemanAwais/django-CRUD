@@ -118,7 +118,6 @@ def register(request):
                 messages.warning(request=request, message='Email already exists')
                 return redirect(to='/register/')
             else:
-
                 user = User.objects.create(
                     username=username,
                     email=email,
