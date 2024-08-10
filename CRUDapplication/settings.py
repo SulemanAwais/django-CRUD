@@ -134,7 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Directory where Django will look for additional static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'playground', 'static'),
 ]
 # Directory where Django will collect all static files for production
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
