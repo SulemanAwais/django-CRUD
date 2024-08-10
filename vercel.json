@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "CRUDapplication/wsgi.py"
+      "src": "CRUDapplication/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "50mb" , "runtime": "python3.11"}
     }
