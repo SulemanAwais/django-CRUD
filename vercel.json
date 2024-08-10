@@ -1,8 +1,10 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "CRUDapplication/wsgi.py",
-      "use": "@vercel/python"
+      "src": "CRUDapplication/wsgi.py"
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "50mb" , "runtime": "python3.11"}
     }
   ],
   "routes": [
@@ -10,5 +12,13 @@
       "src": "/(.*)",
       "dest": "CRUDapplication/wsgi.py"
     }
-  ]
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "CRUDapplication.settings",
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "installCommand": "pip install -r requirements.txt",
+  "buildCommand": "python manage.py collectstatic --noinput",
+  "outputDirectory": "staticfiles"
 }
