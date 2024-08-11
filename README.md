@@ -4,10 +4,10 @@ Welcome to the Django To-Do app! This is a simple, user-friendly application bui
 The deployed version of this app can be accessed here[https://suleman-todo.vercel.app] 
  ## 🌟 Features
 
-➕ Add new tasks
-✏️ Edit existing tasks
-❌ Delete tasks
-📱 Responsive design for all devices
+- ➕ **Add new tasks**
+- ✏️ **Edit existing tasks**
+- ❌ **Delete tasks**
+- 📱 **Responsive design for all devices**
 
 ## 📂 Project Structure
 
