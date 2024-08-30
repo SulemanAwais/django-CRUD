@@ -21,7 +21,7 @@ from EMS.views import ems_root, ems_login_page, ems_register_page
 from playground.views import root, list_dummy_users, landing_page, create_task, update_task, delete_task, login_page, register, logout_page
 
 urlpatterns = [
-    path('', root, name='welcome'),
+    path('', register, name='Register user'),
     path('admin/', admin.site.urls),
     path('dummy-users/', list_dummy_users),
     path('landing_page/', landing_page, name='Home'),
