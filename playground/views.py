@@ -141,6 +141,6 @@ class MyProfileView(LoginRequiredMixin, TemplateView):
         # Fetch user details from the database
         context['username'] = user.username
         context['email'] = user.email
-        context['password'] = '********'  # Typically, you would not fetch or display the current password
+        context['password'] = user.password  # Typically, you would not fetch or display the current password
 
         return context
