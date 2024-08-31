@@ -2,157 +2,130 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib import messages
-from playground.models import Task
+from django.views import View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-# from playground.models import Task
+from playground.models import Task
 
 
-def root(request):
-    if request.user.is_authenticated:
-        return redirect(to='/landing_page/')
-    else:
-        return render(request=request, template_name='root/index.html')
+class RootView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('/landing_page/')
+        return render(request, 'root/index.html')
 
 
-def list_dummy_users(request):
-    users = [
-        {'name': 'Suleman', 'age': 22, 'is_male': True},
-        {'name': 'Salma', 'age': 21, 'is_male': False},
-        {'name': 'Idrees', 'age': 33, 'is_male': False},
-    ]
-    return render(request=request, template_name='hello.html', context={'users': users})
+class ListDummyUsersView(View):
+    def get(self, request):
+        users = [
+            {'name': 'Suleman', 'age': 22, 'is_male': True},
+            {'name': 'Salma', 'age': 21, 'is_male': False},
+            {'name': 'Idrees', 'age': 33, 'is_male': False},
+        ]
+        return render(request, 'hello.html', {'users': users})
 
 
-@login_required(login_url='/login/')
-def landing_page(request):
-    tasks_queryset = Task.objects.all()
-    print(tasks_queryset)
-    if tasks_queryset is not None:
-        tasks = {'tasks': tasks_queryset,
-                 # 'username': username
-                 }
-        return render(request=request, template_name='landing_page/index.html', context=tasks)
-    else:
-        return render(request=request, template_name='landing_page/index.html'
-                      # , context={'username': username}
-                      )
+class LandingPageView(LoginRequiredMixin, ListView):
+    model = Task
+    template_name = 'landing_page/index.html'
+    context_object_name = 'tasks'
+    login_url = '/login/'
+
+    def get_queryset(self):
+        return Task.objects.all()
 
 
-@login_required(login_url='/')
-def create_task(request):
-    try:
-        if request.method == 'POST':
-            data = request.POST
-            title = data.get('title')
-            content = data.get('content')
-            if title is '' and content is '':
-                messages.warning(request=request, message="At least one field need to be filled")
-                return redirect(f'/create-task/')
-            Task.objects.create(
-                title=title,
-                content=content
-            )
-            return redirect(to='/')
-    except Exception as error:
-        return HttpResponse(error)
-    return render(request=request, template_name='create_task/index.html')
+class CreateTaskView(LoginRequiredMixin, CreateView):
+    model = Task
+    fields = ['title', 'content']
+    template_name = 'create_task/index.html'
+    login_url = '/login/'
+
+    def form_valid(self, form):
+        title = form.cleaned_data.get('title')
+        content = form.cleaned_data.get('content')
+        if not title and not content:
+            messages.warning(self.request, "At least one field needs to be filled")
+            return redirect('/create-task/')
+        return super().form_valid(form)
 
 
-@login_required(login_url='/')
-def update_task(request, id):
-    try:
-        if request.method == 'POST':
-            data = request.POST
-            title = data.get('title')
-            content = data.get('content')
-            if title is '' and content is '':
-                messages.warning(request=request, message="At least one field need to be filled")
-                return redirect(f'/update-task/{id}', context={'id': id})
-            task = Task.objects.get(id=id)
-            if task:
-                if title:
-                    task.title = title
-                if content:
-                    task.content = content
-            task.save()
-            landing_page_url = reverse(landing_page)
-            return redirect(to=landing_page_url)
+class UpdateTaskView(LoginRequiredMixin, UpdateView):
+    model = Task
+    fields = ['title', 'content']
+    template_name = 'update_task/index.html'
+    login_url = '/login/'
+    pk_url_kwarg = 'id'
 
-        else:
-            return render(request=request, template_name='update_task/index.html', context={'id': id})
-    except Exception as error:
-        return HttpResponse(error)
+    def form_valid(self, form):
+        title = form.cleaned_data.get('title')
+        content = form.cleaned_data.get('content')
+        if not title and not content:
+            messages.warning(self.request, "At least one field needs to be filled")
+            return redirect(f'/update-task/{self.kwargs["id"]}')
+        return super().form_valid(form)
 
-    # return render(request=request, template_name='update_task/index.html')
+    def get_success_url(self):
+        return reverse('landing_page')
 
 
-@login_required(login_url='/')
-def delete_task(request, id):
-    try:
-        task_id = int(id)
-        print(task_id)
-        task = Task.objects.get(id=id)
-        if task:
-            task.delete()
-            return redirect(to='/')
-        else:
-            return HttpResponse('id does not exist')
-    except Exception as error:
-        return HttpResponse(error)
+class DeleteTaskView(LoginRequiredMixin, DeleteView):
+    model = Task
+    template_name = 'landing_page/index.html'
+    login_url = '/login/'
+    pk_url_kwarg = 'id'
+
+    def get_success_url(self):
+        return reverse('landing_page')
 
 
-def register(request):
-    try:
-        if request.method == 'POST':
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'register/index.html')
+
+    def post(self, request):
+        try:
             data = request.POST
             email = data.get('email')
             password = data.get('password')
             username = data.get('username')
-            user_from_username = User.objects.filter(username=username)
-            if user_from_username.exists():
-                messages.warning(request=request, message='Username should be unique')
-                return redirect(to='/register/')
-            user_from_email = User.objects.filter(email=email)
-            if user_from_email.exists():
-                messages.warning(request=request, message='Email already exists')
-                return redirect(to='/register/')
-            else:
-                user = User.objects.create(
-                    username=username,
-                    email=email,
-                )
-                user.set_password(password)
-                user.save()
-                login(request=request, user=user)
-                return redirect(to='/landing_page/')
-    except Exception as error:
-        return HttpResponse(error)
-    return render(request=request, template_name='register/index.html')
+            if User.objects.filter(username=username).exists():
+                messages.warning(request, 'Username should be unique')
+                return redirect('/register/')
+            if User.objects.filter(email=email).exists():
+                messages.warning(request, 'Email already exists')
+                return redirect('/register/')
+            user = User.objects.create_user(username=username, email=email, password=password)
+            login(request, user)
+            return redirect('/landing_page/')
+        except Exception as error:
+            return HttpResponse(error)
 
 
-def login_page(request):
-    try:
-        if request.method == 'POST':
+class LoginPageView(View):
+    def get(self, request):
+        return render(request, 'login/index.html')
+
+    def post(self, request):
+        try:
             data = request.POST
-            username = data.get("username")
-            password = data.get("password")
+            username = data.get('username')
+            password = data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not '' and password is not '':
-                login(request=request, user=user)
-                return redirect(to='/landing_page/')
-            else:
-                messages.warning(request=request, message='Username or Password didn\'t matched')
-                return redirect(to='/login/')
-    except Exception as error:
-        print(error)
-        return HttpResponse(error)
-    return render(request=request, template_name='login/index.html')
+            if user:
+                login(request, user)
+                return redirect('/landing_page/')
+            messages.warning(request, 'Username or Password didn\'t match')
+            return redirect('/login/')
+        except Exception as error:
+            return HttpResponse(error)
 
 
-def logout_page(request):
-    try:
-        logout(request=request)
-        return redirect('/')
-    except Exception as error:
-        return HttpResponse(error)
+class LogoutPageView(View):
+    def get(self, request):
+        try:
+            logout(request)
+            return redirect('/')
+        except Exception as error:
+            return HttpResponse(error)
