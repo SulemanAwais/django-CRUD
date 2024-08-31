@@ -12,7 +12,7 @@ from playground.views import (
 )
 
 urlpatterns = [
-    path('', RootView.as_view(), name='root'),
+    path('', RegisterView.as_view(), name='root'),
     path('dummy-users/', ListDummyUsersView.as_view(), name='list_dummy_users'),
     path('landing_page/', LandingPageView.as_view(), name='landing_page'),
     path('create-task/', CreateTaskView.as_view(), name='create_task'),
