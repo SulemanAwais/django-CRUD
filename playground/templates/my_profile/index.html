@@ -27,7 +27,7 @@
     <header class="py-6 bg-opacity-50 bg-gray-900">
         <nav class="container mx-auto px-6 flex justify-between items-center">
             <a href="#" class="text-3xl font-bold text-white no-underline">TodoMaster</a>
-            <a href="landing.html" class="px-4 py-2 rounded-md bg-purple-600 hover:bg-purple-700 transition duration-300 text-white no-underline">Back to Home</a>
+            <a href="{% url 'landing_page'%}" class="px-4 py-2 rounded-md bg-purple-600 hover:bg-purple-700 transition duration-300 text-white no-underline">Back to Home</a>
         </nav>
     </header>
 
@@ -60,12 +60,12 @@
                         </button>
                     </div>
                 </div>
-                <div class="flex justify-between">
-                    <a href="landing.html"
-                        class="py-2 px-4 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-md transition duration-300">
-                        Back
-                    </a>
-                </div>
+<!--                <div class="flex justify-between">-->
+<!--                    <a href="landing.html"-->
+<!--                        class="py-2 px-4 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-md transition duration-300">-->
+<!--                        Back-->
+<!--                    </a>-->
+<!--                </div>-->
             </form>
         </div>
     </main>
