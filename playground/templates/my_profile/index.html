@@ -35,53 +35,28 @@
         <div class="max-w-2xl mx-auto content p-8 rounded-lg">
             <h1 class="text-3xl font-bold mb-6 text-center">Account Details</h1>
             <form id="accountForm" class="space-y-6">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-2">Profile Picture</label>
-                    <div class="flex space-x-4">
-                        <label class="cursor-pointer">
-                            <input type="radio" name="profilePic" value="user1" class="sr-only" checked>
-                            <svg class="w-16 h-16 text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                        </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="profilePic" value="user2" class="sr-only">
-                            <svg class="w-16 h-16 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                        </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="profilePic" value="user3" class="sr-only">
-                            <svg class="w-16 h-16 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                        </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="profilePic" value="user4" class="sr-only">
-                            <svg class="w-16 h-16 text-yellow-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-                        </label>
-                    </div>
-                </div>
                 <div>
                     <label for="username" class="block text-sm font-medium mb-2">Username</label>
-                    <input type="text" id="username" name="username" required
-                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-purple-500"
+                    <input type="text" id="username" name="username" readonly
+                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
                         value="CurrentUsername">
                 </div>
                 <div>
-                    <label for="newPassword" class="block text-sm font-medium mb-2">New Password</label>
-                    <input type="password" id="newPassword" name="newPassword"
-                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-purple-500"
-                        placeholder="Leave blank to keep current password">
+                    <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" name="email" readonly
+                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                        value="user@example.com">
                 </div>
                 <div>
-                    <label for="confirmPassword" class="block text-sm font-medium mb-2">Confirm New Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword"
-                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-purple-500"
-                        placeholder="Leave blank to keep current password">
+                    <label for="currentPassword" class="block text-sm font-medium mb-2">Current Password</label>
+                    <input type="password" id="currentPassword" name="currentPassword" readonly
+                        class="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                        value="CurrentPassword">
                 </div>
                 <div class="flex justify-between">
-                    <button type="submit"
-                        class="py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-md transition duration-300">
-                        Save Changes
-                    </button>
                     <a href="landing.html"
                         class="py-2 px-4 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-md transition duration-300">
-                        Cancel
+                        Back
                     </a>
                 </div>
             </form>
@@ -89,13 +64,5 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const accountForm = document.getElementById('accountForm');
-        accountForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add your account update logic here
-            alert('Account details update functionality would be implemented here.');
-        });
-    </script>
 </body>
 </html>
