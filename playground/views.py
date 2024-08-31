@@ -50,6 +50,10 @@ class CreateTaskView(LoginRequiredMixin, CreateView):
             return redirect('/create-task/')
         return super().form_valid(form)
 
+    def get_success_url(self):
+        # Redirect to the landing page or any other URL after successful creation
+        return reverse('landing_page')
+
 
 class UpdateTaskView(LoginRequiredMixin, UpdateView):
     model = Task
@@ -72,7 +76,7 @@ class UpdateTaskView(LoginRequiredMixin, UpdateView):
 
 class DeleteTaskView(LoginRequiredMixin, DeleteView):
     model = Task
-    template_name = 'landing_page/index.html'
+    template_name = 'delete_task    /index.html'
     login_url = '/login/'
     pk_url_kwarg = 'id'
 
