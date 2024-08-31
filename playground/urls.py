@@ -8,7 +8,8 @@ from playground.views import (
     DeleteTaskView,
     RegisterView,
     LoginPageView,
-    LogoutPageView
+    LogoutPageView,
+    MyProfileView
 )
 
 urlpatterns = [
@@ -21,4 +22,5 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginPageView.as_view(), name='login'),
     path('logout/', LogoutPageView.as_view(), name='logout'),
+    path('my_profile/', MyProfileView.as_view(), name='my_profile'),
 ]
