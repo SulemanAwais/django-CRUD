@@ -129,3 +129,7 @@ class LogoutPageView(View):
             return redirect('/')
         except Exception as error:
             return HttpResponse(error)
+
+
+class MyProfileView(TemplateView):
+    template_name = 'my_profile/index.html'
