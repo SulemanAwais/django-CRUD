@@ -131,5 +131,16 @@ class LogoutPageView(View):
             return HttpResponse(error)
 
 
-class MyProfileView(TemplateView):
+class MyProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'my_profile/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        # Fetch user details from the database
+        context['username'] = user.username
+        context['email'] = user.email
+        context['password'] = '********'  # Typically, you would not fetch or display the current password
+
+        return context
