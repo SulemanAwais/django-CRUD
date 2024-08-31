@@ -17,24 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from EMS.views import ems_root, ems_login_page, ems_register_page
-from playground.views import root, list_dummy_users, landing_page, create_task, update_task, delete_task, login_page, register, logout_page
-
 urlpatterns = [
-    path('', register, name='Register user'),
     path('admin/', admin.site.urls),
-    path('dummy-users/', list_dummy_users),
-    path('landing_page/', landing_page, name='Home'),
-    path('create-task/', create_task, name='Create Task'),
-    path('update-task/<id>/', update_task, name='Update Task'),
-    path('update-task/', update_task),
-    path('delete-task/<id>/', delete_task, name='Delete Task'),
-    path('login/', login_page, name='User Login'),
-    path('logout/', logout_page),
-    path('register/', register, name='Register user'),
-
-    path('ems/', ems_root, name='welcome'),
-    path('ems-login/', ems_login_page, name='welcome'),
-    path('ems-register/', ems_register_page, name='welcome'),
-
+    path('', include('playground.urls')),  # Include URLs from the playground app
+    # path('ems/', include('EMS.urls')),  # Include URLs from the EMS app
 ]
