@@ -71,15 +71,14 @@
             <div class="flex items-center">
                 <a href="{% url 'create_task' %}" class="px-4 py-2 rounded-md bg-purple-600 hover:bg-purple-700 transition duration-300 text-white no-underline mr-4">Create Task</a>
                 <div class="relative">
-                    <div>
-    <button type="button" class="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary" id="profileButton" aria-expanded="false" aria-haspopup="true">
-        <img class="h-8 w-8 rounded-full" src="https://img.icons8.com/clouds/256/000000/user.png" alt="">
-    </button>
-</div>
-
+                <div>
+                    <button type="button" class="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary" id="profileButton" aria-expanded="false" aria-haspopup="true">
+                        <img class="h-8 w-8 rounded-full" src="https://secure.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y&s=256" alt="">
+                    </button>
+                </div>
                     <div id="profileDropdown" class="profile-dropdown">
                         <p class="text-white mb-2">Welcome, <span id="username">User</span>!</p>
-                        <a href="#" class="block px-4 py-2 text-white bg-purple-600 hover:bg-purple-700 rounded-md transition duration-300 text-center no-underline">My profile</a>
+                        <a href="{%url 'my_profile'%}" class="block px-4 py-2 text-white bg-purple-600 hover:bg-purple-700 rounded-md transition duration-300 text-center no-underline">My profile</a>
                         <a href="{%url 'logout'%}" class="block px-4 py-2 mt-2 text-white bg-red-600 hover:bg-red-700 rounded-md transition duration-300 text-center no-underline">Logout</a>
                     </div>
                 </div>
