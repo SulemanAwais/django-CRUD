@@ -27,6 +27,10 @@ class ListDummyUsersView(View):
         return render(request, 'hello.html', {'users': users})
 
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+from .models import Task
+
 class LandingPageView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'landing_page/index.html'
@@ -34,7 +38,15 @@ class LandingPageView(LoginRequiredMixin, ListView):
     login_url = '/login/'
 
     def get_queryset(self):
+        # Return all tasks
         return Task.objects.all()
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation to get the existing context
+        context = super().get_context_data(**kwargs)
+        # Add the logged-in user's username to the context
+        context['username'] = self.request.user.username
+        return context
 
 
 class CreateTaskView(LoginRequiredMixin, CreateView):
