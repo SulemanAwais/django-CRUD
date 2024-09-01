@@ -39,14 +39,15 @@ class LandingPageView(LoginRequiredMixin, ListView):
 
 class CreateTaskView(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'due_date']
     template_name = 'create_task/index.html'
     login_url = '/login/'
 
     def form_valid(self, form):
         title = form.cleaned_data.get('title')
         content = form.cleaned_data.get('content')
-        if not title and not content:
+        due_date = form.cleaned_data.get('due_date')
+        if not title and not content and not due_date:
             messages.warning(self.request, "At least one field needs to be filled")
             return redirect('/create-task/')
         return super().form_valid(form)
