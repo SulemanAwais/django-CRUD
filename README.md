@@ -1,8 +1,12 @@
-# 📝 Django To-Do App
+# 📝 TODOMaster - A Django TODO App
 
-Welcome to the Django To-Do app! This is a simple, user-friendly application built with Django that helps you manage your daily tasks effectively. 🚀
-The deployed version of this app can be accessed here[https://suleman-todo.vercel.app] 
- ## 🌟 Features
+Welcome to the TODOMaster 🎉 ! This is a simple, user-friendly application built with Django that helps you manage your daily tasks effectively. 🚀
+The deployed version of this app can be accessed here [🌐](https://suleman-todo.vercel.app/)
+
+* 📦 Deployed on [Vercel](https://vercel.com/)
+
+* 🔗 Database hosted on [Clever Cloud](https://www.clever-cloud.com)
+## 🌟 Features
 
 - ➕ **Add new tasks**
 - ✏️ **Edit existing tasks**
