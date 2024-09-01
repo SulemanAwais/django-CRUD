@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -76,13 +77,20 @@ class UpdateTaskView(LoginRequiredMixin, UpdateView):
 
 class DeleteTaskView(LoginRequiredMixin, DeleteView):
     model = Task
-    template_name = 'delete_task    /index.html'
+    template_name = 'delete_task/index.html'
     login_url = '/login/'
     pk_url_kwarg = 'id'
+    success_url = reverse_lazy('landing_page')  # Use reverse_lazy for success_url
 
-    def get_success_url(self):
-        return reverse('landing_page')
-
+    def get_object(self, queryset=None):
+        """Override get_object to handle object retrieval."""
+        obj = get_object_or_404(Task, id=self.kwargs['id'])
+        return obj
+    def post(self, request, *args, **kwargs):
+        """Override post method to delete the task directly."""
+        task = self.get_object()
+        task.delete()
+        return HttpResponseRedirect(self.success_url)
 
 class RegisterView(View):
     def get(self, request):
