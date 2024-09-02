@@ -1,9 +1,10 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
 class Task(models.Model):
-    User = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, null=False, blank=False)
     content = models.TextField()
     due_date = models.DateField(null=True, blank=True)
