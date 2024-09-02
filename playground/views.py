@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
@@ -39,12 +39,10 @@ class LandingPageView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Return all tasks
-        return Task.objects.all()
+        return Task.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation to get the existing context
         context = super().get_context_data(**kwargs)
-        # Add the logged-in user's username to the context
         context['username'] = self.request.user.username
         return context
 
@@ -56,6 +54,7 @@ class CreateTaskView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         title = form.cleaned_data.get('title')
         content = form.cleaned_data.get('content')
         due_date = form.cleaned_data.get('due_date')
@@ -86,6 +85,11 @@ class UpdateTaskView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('landing_page')
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.user != self.request.user:
+            raise Http404("You do not have permission to access this task.")
+        return obj
 
 
 class DeleteTaskView(LoginRequiredMixin, DeleteView):
@@ -96,9 +100,11 @@ class DeleteTaskView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('landing_page')  # Use reverse_lazy for success_url
 
     def get_object(self, queryset=None):
-        """Override get_object to handle object retrieval."""
-        obj = get_object_or_404(Task, id=self.kwargs['id'])
+        obj = super().get_object(queryset=queryset)
+        if obj.user != self.request.user:
+            raise Http404("You do not have permission to access this task.")
         return obj
+
     def post(self, request, *args, **kwargs):
         """Override post method to delete the task directly."""
         task = self.get_object()
